@@ -1,0 +1,35 @@
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) {
+
+    const hashMap = new Map();
+
+    for (const word of strs) {
+        const numericalRepresentationOfStrs = Array(26).fill(0);
+
+        for (const c of word) {
+            const alphabetPosition = c.charCodeAt(0) - 97;
+            numericalRepresentationOfStrs[alphabetPosition]++; 
+        }
+        const pattern = numericalRepresentationOfStrs.join()
+        if(!hashMap.has(pattern)) {
+            hashMap.set(pattern, [word]);
+        } else {
+            hashMap.get(pattern).push(word);
+        }
+    }
+
+
+    return [...hashMap.values()];
+
+
+    
+
+};
+
+// notes:
+// because the there can be only 26 alphabets, it good approach to map alphabets manually and then compare the formed pattern.
+// and is faster than using sort approach 
+// time complexity O(n * m) where n is length of strs and m is length of longest word
